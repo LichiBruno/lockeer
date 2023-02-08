@@ -1,0 +1,18 @@
+{
+  "short_name": "Lockeer",
+  "name": "Lockeer OTP generator",
+  "version": "1.0",
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "index.html",
+    "default_title": "Lockeer"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "icons": {
+    "16": "Lockeer.svg",
+    "48": "Lockeer.svg",
+    "128": "Lockeer.svg"
+  }
+}
