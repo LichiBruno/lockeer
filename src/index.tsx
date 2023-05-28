@@ -1,19 +1,35 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import * as React from "react";
+import * as ReactDOM from "react-dom";
+import CardContainer from "./CardContainer";
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+interface AccountData {
+  accountName: string;
+  provider: string;
+  code: string;
+}
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+const App: React.FC = () => {
+  const [accounts, setAccounts] = React.useState<AccountData[]>([]);
+  const [refreshKey, setRefreshKey] = React.useState(0);
+  const refresh = () => {
+    setRefreshKey((prevKey) => prevKey + 1);
+  };
+
+  React.useEffect(() => {
+    chrome.storage.local.get(null, function (items) {
+      const allAccounts: AccountData[] = Object.values(items);
+      setAccounts(allAccounts);
+    });
+  }, [refreshKey]); // re-run this effect when refreshKey changes
+
+  return (
+    <>
+    <h1>Sip</h1>
+      {accounts.map((account) => (
+        <CardContainer key={account.accountName} data={account} onDelete={refresh} />
+      ))}
+    </>
+  );
+};
+
+ReactDOM.render(<App />, document.getElementById("root"));
