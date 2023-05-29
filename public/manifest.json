@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "lockeer 2FA generator",
+  "short_name": "lockeer",
+  "description": "This extension generates 2FA codes.",
+  "version": "1.0",
+  "icons":
+    {
+      "64": "icon.png",
+      "512": "icon.png"
+    },
+  "permissions": ["storage"],
+  "action": {
+    "default_popup": "index.html"
+  }
+}
